@@ -135,7 +135,13 @@ Additionally, there are 15 classs that images can be classified as. This include
 The following sections will discuss the steps taken to arrive at the baseline model for this project. First, the preprocessing that was done to transform the raw data, then, the analysis that was done on the data to get a better understanding of the given dataset. Finally, the design of the baseline model that was used to get initial results and a sufficient checkpoint in the totality of the project.
 
 \subsection{Preprocessing}
+In this step, we prepared the NIH Chest X-ray dataset for training a multi-label classification model. We first loaded the Data\_Entry\_2017.csv file and extracted the corresponding X-ray images from the downloaded folders (images\_001/images, images\_002/images). Since the images were stored in nested directories, we used recursive search to map each image filename to its full file path.
 
+We then filtered the dataset to include only those entries for which the images were available locally. The Finding Labels column was processed to convert label strings (e.g., "Effusion|Mass") into a list format. Rows with "No Finding" were removed to focus only on abnormal cases, which are more relevant for our task.
+
+Next, we applied multi-label encoding using MultiLabelBinarizer to convert the labels into a binary vector format suitable for training. We also performed a basic data cleaning step to remove any corrupt images.
+
+Finally, the dataset was split into training, validation, and test sets in an 80-10-10 ratio. The processed data, along with label mappings, was saved to disk for use in the model training stage.
 
 \subsection{Analysis}
 In order to get a better understanding of the dataset and to be able to shape the model in a way to get reliable shape, the datasets are analyzed and the distribution of various classes are calculated.
@@ -144,14 +150,20 @@ The diseases are analyzed among all of the patients and it is found that around 
 
 The average age for all of the patients is 50 years of age with a standard deviation of 16.19. The youngest patient is 6 years old while the oldest recorded data is a patient with 94 years of age. Based on these statistics, the data is a vastly wide spread of different ages, which will help in the generalization process.
 
-Lastly, the patients gender appears to be split essentially even, with males accounting fot 50.6 \% of the data.
+Lastly, the patients gender appears to be split essentially even, with males accounting for 50.6 \% of the data.
 
 \subsection{Baseline Model}
+...
 
 \section{Next Steps}
+After the construction of a baseline model, we plan to make several improvements in order to achieve a better evaluation.
 
+The first step we must take is to incorporate a retrieval augmented generation (RAG) framework. This type of model will leverage external medical knowledge in addition to the visual data. A language model is used to combine the retrieved context and the image features to output a report of Findings and Impressions. This type of fusion model will give us the predictions of the model.
 
-\section{conclusion}
+Additionally, we must further tune the hyperparameters to achieve the best results possible. This step will be completed using well-known tuning libraries.
+
+\section{Conclusion}
+Overall, the results of this model show ...
 
 
 \section*{References}
