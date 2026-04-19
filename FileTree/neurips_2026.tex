@@ -1,0 +1,175 @@
+\documentclass{article}
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2026
+
+% The authors should use one of these tracks.
+% Before accepting by the NeurIPS conference, select one of the options below.
+% 0. "default" for submission
+\usepackage[final]{neurips_2026}
+% the "default" option is equal to the "main" option, which is used for the Main Track with double-blind reviewing.
+% 1. "main" option is used for the Main Track
+%  \usepackage[main]{neurips_2026}
+% 2. "position" option is used for the Position Paper Track
+%  \usepackage[position]{neurips_2026}
+% 3. "eandd" option is used for the Evaluations & Datasets Track
+ % \usepackage[eandd]{neurips_2026}
+ % if you want to opt-in for a de-anomymized submission (not recommended, but OK):
+ %\usepackage[eandd, nonanonymous]{neurips_2026}
+% 4. "creativeai" option is used for the Creative AI Track
+%  \usepackage[creativeai]{neurips_2026}
+% 5. "sglblindworkshop" option is used for the Workshop with single-blind reviewing
+ % \usepackage[sglblindworkshop]{neurips_2026}
+% 6. "dblblindworkshop" option is used for the Workshop with double-blind reviewing
+%  \usepackage[dblblindworkshop]{neurips_2026}
+
+% After being accepted, the authors should add "final" behind the track to compile a camera-ready version.
+% 1. Main Track
+ % \usepackage[main, final]{neurips_2026}
+% 2. Position Paper Track
+%  \usepackage[position, final]{neurips_2026}
+% 3. Evaluations & Datasets Track
+ % \usepackage[eandd, final]{neurips_2026}
+% 4. Creative AI Track
+%  \usepackage[creativeai, final]{neurips_2026}
+% 5. Workshop with single-blind reviewing
+%  \usepackage[sglblindworkshop, final]{neurips_2026}
+% 6. Workshop with double-blind reviewing
+%  \usepackage[dblblindworkshop, final]{neurips_2026}
+% Note. For the workshop paper template, both \title{} and \workshoptitle{} are required, with the former indicating the paper title shown in the title and the latter indicating the workshop title displayed in the footnote.
+% For workshops (5., 6.), the authors should add the name of the workshop, "\workshoptitle" command is used to set the workshop title.
+% \workshoptitle{WORKSHOP TITLE}
+
+% "preprint" option is used for arXiv or other preprint submissions
+ % \usepackage[preprint]{neurips_2026}
+
+% to avoid loading the natbib package, add option nonatbib:
+%    \usepackage[nonatbib]{neurips_2026}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+
+% Note. For the workshop paper template, both \title{} and \workshoptitle{} are required, with the former indicating the paper title shown in the title and the latter indicating the workshop title displayed in the footnote. 
+\title{Deep Learning Final Project Checkpoint 2 Report}
+
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+
+\author{%
+  Tyler Rutley \\
+  \texttt{tjrutley@buffalo.edu} \\
+  \And
+  Ramya Chandrasekhara \\
+  \texttt{rc98@buffalo.edu} \\
+  \And
+  Faisal Mohammed Faisal Khan \\
+  \texttt{m62@buffalo.edu} \\
+}
+
+
+\begin{document}
+
+
+\maketitle
+\begin{abstract}
+ Interpretation of chest radiographs (CXR) is a crucial task in the field of clinical diagnosis. It requires both visual understanding and structured reporting. However, automated report generation models are more often suffering from hallucinations and lack grounded clinical reasoning. \\\\
+ In this project, we plan to propose a multi-modal augmented generation (RAG) framework to generate automated CXR reports that improves both interpretability and accuracy.\\\\
+ Our primary objective is to combine a vision-based abnormality detection with a knowledgeable retrieval module that leverages radiology guidelines. The retrieved context becomes a guide to the language model in generating reports consisting of Findings and Impression sections\\\\
+  We design a two-stage pipeline that mimics radiologist workflows and  evaluate the system using both traditional NLP metrics and clinically relevant measures. This approach aims to improve the reliability and interpretability of automated medical report generation.
+\end{abstract}
+
+
+
+\section{Background}
+CXRs are one of the most commonly performed imaging studies in the field of medicine. They are able to detect a wide range of conditions such as heart failure, pnemonia, and lung cancer. To be able to interpret these images requires substantial expertise from trained radiologists. As the volumes of incoming images continue to rise, the need for timely and accurate reports can crete bottlenecks in the workflow of clinicals.\\\\
+As the power of deep learning continues to advance, society gains increasing opportunities to leverage the models in domains as impactful as healthcare. A key challenge is the reliability and trust of these models. In the context of CXR interpretation, the goal is to improve the efficiency and consistency of these radiology reports. A single standarized model can help streamline the overall workflow\\\\
+This project aims to develop an automated CXR report generation system that is capable of producing accurate and interpretable findings that can only benefit and support the radiologists.
+
+\section{Dataset Description}
+The dataset used was from the National Institutes of Health Chest X-Ray[1]. It contains 112,120 X-ray images with disease labels from 30,805 unique patients. The image labels are gathered via Natural Language Processing and expects suitable labels for more than 90 \% of the dataset. The data contains various labels and patient data including:
+\begin{itemize}
+    \item File Name
+    \item Disease Type
+    \item Follow-up Number
+    \item Patient ID
+    \item Patient Age
+    \item Patient Gender
+    \item View Position
+    \item Original Width \& Height
+    \item Orginal Image Pixel Spacing
+\end{itemize}
+
+Additionally, there are 15 classs that images can be classified as. This includes 14 diseases and one class for "No findings". Images are able to be classified as more than one disease; except those containing "No findings". The 14 possible diseases are listed below:
+\begin{itemize}
+    \item Atelectasis
+    \item Consolidation
+    \item Infiltration
+    \item Pneumothorax
+    \item Edema
+    \item Emphysema
+    \item Fibrosis
+    \item Effusion
+    \item Pneumonia
+    \item Pleural\_thickening
+    \item Cardiomegaly
+    \item Nodule Mass
+    \item Hernia
+\end{itemize}
+
+\section{Implementation}
+The following sections will discuss the steps taken to arrive at the baseline model for this project. First, the preprocessing that was done to transform the raw data, then, the analysis that was done on the data to get a better understanding of the given dataset. Finally, the design of the baseline model that was used to get initial results and a sufficient checkpoint in the totality of the project.
+
+\subsection{Preprocessing}
+
+
+\subsection{Analysis}
+In order to get a better understanding of the dataset and to be able to shape the model in a way to get reliable shape, the datasets are analyzed and the distribution of various classes are calculated.
+
+The diseases are analyzed among all of the patients and it is found that around 18\% of the data has Infiltration only; with the second most observed label being Atelectasis with 9\%.
+
+The average age for all of the patients is 50 years of age with a standard deviation of 16.19. The youngest patient is 6 years old while the oldest recorded data is a patient with 94 years of age. Based on these statistics, the data is a vastly wide spread of different ages, which will help in the generalization process.
+
+Lastly, the patients gender appears to be split essentially even, with males accounting fot 50.6 \% of the data.
+
+\subsection{Baseline Model}
+
+\section{Next Steps}
+
+
+\section{conclusion}
+
+
+\section*{References}
+
+\medskip
+
+
+
+\small
+
+
+[1] Wang, X., Peng, Y., Lu, L., Lu, Z., Bagheri, M., \& Summers, R. M. (2017). ChestX-ray8: Hospital-scale Chest X-ray Database and Benchmarks on Weakly-Supervised Classification and Localization of Common Thorax Diseases [Data set]. National Institutes of Health Clinical Center. Kaggle. https://www.kaggle.com/datasets/nih-chest-xrays/data
+
+
+
+
+\newpage
+\input{checklist.tex}
+
+
+\end{document}
