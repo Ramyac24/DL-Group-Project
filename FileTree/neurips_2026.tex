@@ -169,7 +169,11 @@ The first step we must take is to incorporate a retrieval augmented generation (
 Additionally, we must further tune the hyperparameters to achieve the best results possible. This step will be completed using well-known tuning libraries.
 
 \section{Conclusion}
-Overall, the results of this model show ...
+Overall the results demonstrate that a Vision Transformer is effective for chest X-ray analysis. Even with limited training, the model achieved a Mean AUC of 0.71. This shows its ability to reliably detect and flag various abnormalities in medical images. It performed particularly well on conditions such as Edema and Hernia, suggesting strong capability in identifying prominent structural changes.
+
+However, the model shows limitations when dealing with different patterns and fine-grained textures. This shows the importance of our next step, that is integrating a Retrieval Augmented Generation (RAG) framework. By connecting visual predictions with established medical guidelines, we can move beyond numerical outputs and generate comprehensive, human-readable reports.
+
+This approach combines the model’s visual understanding with contextual medical knowledge, improving both interpretability and clinical relevance, and making the system more useful and trustworthy for real world healthcare applications.
 
 
 \section*{References}
