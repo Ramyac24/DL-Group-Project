@@ -153,7 +153,13 @@ The average age for all of the patients is 50 years of age with a standard devia
 Lastly, the patients gender appears to be split essentially even, with males accounting for 50.6 \% of the data.
 
 \subsection{Baseline Model}
-...
+For the vision encoder, we implemented a Vision Transformer (ViT-B/16), pre-trained on ImageNet. The choice was motivated by the model's ability to capture long range dependencies within the X-ray images.
+
+To adapt the model for the Chest X-ray dataset, the original 1000 class classification head was replaced with a custom linear layer featuring 14 output neurons, corresponding to the identified pathologies. Given that chest X-ray interpretation is a multi label task, where a single patient may have multiple conditions, we utilized a Sigmoid activation function in the final layer. This allows the model to treat each pathology as an independent binary classification task. 
+
+The model was trained using a Binary Cross-Entropy with Logits loss function and optimized via the Adam optimizer with a learning rate of $1 \times 10^{-4}$. 
+
+To ensure computational efficiency during initial runs, a frozen backbone strategy was employed, focusing the gradient updates solely on the classification head.
 
 \section{Next Steps}
 After the construction of a baseline model, we plan to make several improvements in order to achieve a better evaluation.
