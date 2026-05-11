@@ -1,0 +1,4 @@
+variant,n_judged,judge_factual_accuracy,judge_completeness,judge_no_hallucination,judge_clinical_fluency,judge_overall
+no_rag,50,1.36,1.78,3.98,2.98,2.525
+def_only,50,1.3,1.72,4.0,3.06,2.52
+rag_full,50,1.32,1.84,3.96,2.94,2.515

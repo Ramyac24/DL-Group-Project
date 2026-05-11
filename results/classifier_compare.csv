@@ -1,0 +1,15 @@
+class,AUC_TXV,AUC_ViT_FT,F1_ViT_FT,threshold
+Atelectasis,0.668,0.749,0.466,0.55
+Cardiomegaly,0.835,0.835,0.371,0.9
+Consolidation,0.642,0.606,0.201,0.525
+Edema,0.793,0.849,0.323,0.85
+Effusion,0.8,0.746,0.498,0.375
+Emphysema,0.653,0.87,0.34,0.825
+Fibrosis,0.687,0.789,0.309,0.625
+Hernia,1.0,0.986,0.167,0.775
+Infiltration,0.575,0.65,0.545,0.375
+Mass,0.727,0.624,0.227,0.5
+Nodule,0.608,0.752,0.346,0.725
+Pleural_Thickening,0.644,0.695,0.168,0.65
+Pneumonia,0.442,0.717,0.0,0.9
+Pneumothorax,0.614,0.746,0.372,0.8
