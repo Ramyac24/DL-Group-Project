@@ -5,3 +5,5 @@ images/
 iu_images/
 __pycache__/
 *.zip
+.vscode
+FileTree
