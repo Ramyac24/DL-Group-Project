@@ -13,8 +13,3 @@ See `results/` for the headline tables.
 ## Datasets
 - **NIH ChestX-ray14** — classifier training (via Kaggle).
 - **Indiana University Chest X-rays (OpenI)** — RAG eval (via Kaggle, see notebook 02).
-
-## Note on rendering notebooks
-GitHub's notebook renderer occasionally fails on Colab-exported notebooks due to
-widget metadata quirks. If a notebook does not render here, open it on
-[nbviewer.org](https://nbviewer.org/github/Ramyac24/DL-Group-Project) instead.
